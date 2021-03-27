@@ -8,7 +8,7 @@ def print_depth(data):
     global cache
     global depth
 
-    if not(data) or type(data)!=dict:
+    if not(data) or not isinstance(data,dict):
         return ""
 
     depth += 1

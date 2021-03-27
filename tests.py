@@ -22,6 +22,7 @@ class TestProblemOne(unittest.TestCase):
     def test_sort_output(self):
         self.assertEqual(sort_output(self.unsorted_dict), "key1 1\nkey2 2\nkey3 2\nkey4 3\nkey5 4\n")
 
+
 class TestProblemTwo(unittest.TestCase):  
     def setUp(self):
         class Person(object):
@@ -31,9 +32,10 @@ class TestProblemTwo(unittest.TestCase):
                 self.father = father
         person_a = Person("User", "1", None)
         person_b = Person("User", "2", person_a)
+        self.test_dict = {"key1":{"key1":5,"key2":8},"key2":{"user":person_b}}
 
     def test_object_depth(self):
-        self.assertEqual()  
+        self.assertEqual(print_depth_object(self.test_dict), "key1 1\nkey2 1\nkey1 2\nkey2 2\nuser 2\nfather 3\nfirst_name 3\nlast_name 3\nfather 4\nfirst_name 4\nlast_name 4\n")  
 
 if __name__=='__main__':
     unittest.main()
