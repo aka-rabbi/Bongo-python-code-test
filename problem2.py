@@ -4,7 +4,7 @@ cache = {}
 depth = 0
 
 def print_depth_object(data):
-
+    ''' upadtes cache with key and their depth. for every nested dict or object recursive function is called. '''
     global cache
     global depth
 
@@ -33,6 +33,7 @@ def print_depth_object(data):
         return "Error"
 
 def sort_output(output):
+    '''  sorts cache with respect to depth '''
     global cache
     global depth
 
@@ -50,13 +51,6 @@ def sort_output(output):
         output_str += f"{out_key} {out_val}\n"
     return output_str
 
-if __name__ == "__main__":
-    try:
-        with open(sys.argv[1]) as f:
-            data = json.loads(f.read())
-        print(print_depth_object(data))
-    except IndexError:
-        pass
 
 
 

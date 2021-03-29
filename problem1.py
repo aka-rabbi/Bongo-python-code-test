@@ -4,7 +4,7 @@ import json
 cache = {}
 depth = 0
 def print_depth(data):
-
+    ''' upadtes cache with key and their depth. for every nested dict recursive function is called. '''
     global cache
     global depth
 
@@ -17,13 +17,18 @@ def print_depth(data):
             print_depth(val) 
             depth -= 1
         
-        cache[key] = depth
+        if key in cache:
+            # uniquely identify same keys
+            cache[key+'@'+str(depth)] = depth
+        else:
+            cache[key] = depth
     if depth==1:
         return sort_output(cache)
     else:
         return "Error"
 
 def sort_output(output):
+    ''' sorts cache with respect to depth '''
     global cache
     global depth
 
@@ -32,18 +37,17 @@ def sort_output(output):
     cache = {}
     depth = 0
     for item in sorted_output:
-        output_str += f"{item[0]} {item[1]}\n"
+        out_val = str(item[1])
+        repeat_key = '@'+out_val in item[0]
+        if repeat_key:
+            out_key = item[0].split('@')[0]
+        else:
+            out_key = item[0] 
+        output_str += f"{out_key} {out_val}\n"
     return output_str
 
 
 
-if __name__ == "__main__":
-    try:
-        with open(sys.argv[1]) as f:
-            data = json.loads(f.read())
-        print(print_depth(data))
-    except IndexError:
-        pass
 
     
 
